@@ -4,16 +4,6 @@ from flask_mail import Mail,Message
 import random
 import string
 app = Flask(__name__)
-app.config.update(
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME='shubhamkhandelwal16102001@gmail.com',
-    MAIL_PASSWORD='shubham@63760'
-)
-app.secret_key='shubhamhmk'
-
-mail=Mail(app)
 
 @app.route('/')
 def hello_world():
@@ -144,10 +134,6 @@ def register():
     else:
         return 'already registered'
 
-@app.route('/google')
-def google():
-    path='F:/files/user-icon.png'
-    return send_file(path, mimetype='image/png', as_attachment=true)
 
 @app.route('/home')
 def home():
@@ -208,15 +194,6 @@ def deleteurl():
         return redirect('/home')
     return render_template('login.html')
 
-@app.route('/sendmail')
-def sendmail():
-    msg=Message(subject='mail sender', sender='shubhamkhandelwal16102001@gmail.com', recipients=['shubhamkhandelwal.cse23@jecrc.ac.in'], body="this is my first email through python")
-    msg.cc=['shivanikhandelwalbtp@gmail.com']
-    msg.html=render_template('index3.html')
-    with app.open_resource("E:/files/merge/favicon.jpg") as f:
-        msg.attach("favicon.jpg", "image/jpg", f.read())
-    mail.send(msg)
-    return "mail sent!!!"
 
 @app.route('/logout')
 def logout():
